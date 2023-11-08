@@ -1,18 +1,16 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateUserRequest } from '../requests/create-user.request';
 import { UsersService } from '../providers/users.service';
+import { SearchUserRequest } from '../requests/search-user.request';
+import { UpdateUserRequest } from '../requests/update-user.request';
 
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get()
-    index(
-        @Query('keyword') keyword?: string,
-        @Query('page', new ParseIntPipe({ optional: true })) page?: number,
-        @Query('limit', new ParseIntPipe({ optional: true })) limit?: number
-    ) {
-        return this.usersService.search(keyword, page, limit);
+    index(@Query() searchRequest: SearchUserRequest) {
+        return this.usersService.search(searchRequest.keyword, searchRequest.page, searchRequest.limit);
     }
 
     @Post()
@@ -27,17 +25,13 @@ export class UsersController {
     }
 
     @Put('/:id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() requestBody: object) {
-        return {
-            id: id,
-            requestBody: requestBody
-        }
+    update(@Param('id', ParseIntPipe) id: number, @Body() requestBody: UpdateUserRequest) {
+        return this.usersService.update(id, requestBody);
     }
 
     @Delete('/:id')
+    @HttpCode(204)
     destroy(@Param('id', ParseIntPipe) id: number) {
-        return {
-            id: id
-        }
+        this.usersService.delete(id);
     }
 }

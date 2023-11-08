@@ -8,4 +8,8 @@ export class User {
     firstName?: string;
 
     lastName?: string;
+
+    isDeleted: boolean = false;
+
+    password: string;
 }

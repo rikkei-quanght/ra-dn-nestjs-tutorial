@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsStrongPassword, Length, MaxLength, MinLength } from "class-validator";
 
 // https://github.com/typestack/class-validator#validation-decorators
 export class CreateUserRequest {
@@ -18,4 +18,9 @@ export class CreateUserRequest {
     @IsOptional()
     @MaxLength(50)
     lastName: string;
+
+    @IsNotEmpty()
+    @Length(8, 20)
+    @IsStrongPassword()
+    password: string;
 }
