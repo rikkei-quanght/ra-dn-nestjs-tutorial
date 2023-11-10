@@ -9,29 +9,29 @@ export class UsersController {
     constructor(private usersService: UsersService) { }
 
     @Get()
-    index(@Query() searchRequest: SearchUserRequest) {
-        return this.usersService.search(searchRequest.keyword, searchRequest.page, searchRequest.limit);
+    async index(@Query() searchRequest: SearchUserRequest) {
+        return await this.usersService.search(searchRequest.keyword, searchRequest.page, searchRequest.limit);
     }
 
     @Post()
     @HttpCode(201)
-    create(@Body() requestBody: CreateUserRequest) {
-        this.usersService.create(requestBody);
+    async create(@Body() requestBody: CreateUserRequest) {
+        await this.usersService.create(requestBody);
     }
 
     @Get('/:id')
-    show(@Param('id', ParseIntPipe) id: number) {
-        return this.usersService.find(id);
+    async show(@Param('id', ParseIntPipe) id: number) {
+        return await this.usersService.find(id);
     }
 
     @Put('/:id')
-    update(@Param('id', ParseIntPipe) id: number, @Body() requestBody: UpdateUserRequest) {
-        return this.usersService.update(id, requestBody);
+    async update(@Param('id', ParseIntPipe) id: number, @Body() requestBody: UpdateUserRequest) {
+        return await this.usersService.update(id, requestBody);
     }
 
     @Delete('/:id')
     @HttpCode(204)
-    destroy(@Param('id', ParseIntPipe) id: number) {
-        this.usersService.delete(id);
+    async destroy(@Param('id', ParseIntPipe) id: number) {
+        await this.usersService.delete(id);
     }
 }
