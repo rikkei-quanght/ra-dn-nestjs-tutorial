@@ -21,6 +21,7 @@ export class UsersService {
         return await this.userRepository.findAndCount({
             relations: {
                 profile: true,
+                passwords: true,
             },
             where: {
                 username: ILike(`%${keyword || ''}%`)
