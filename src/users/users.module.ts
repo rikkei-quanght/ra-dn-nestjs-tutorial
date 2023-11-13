@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserProfile } from './entities/user-profile.entity';
 import { UserPassword } from './entities/user-password.entity';
+import { Role } from './entities/role.entity';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UserPassword } from './entities/user-password.entity';
       User,
       UserProfile,
       UserPassword,
+      Role,
     ])
   ],
   controllers: [UsersController],

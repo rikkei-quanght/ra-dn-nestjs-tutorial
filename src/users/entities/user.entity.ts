@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { UserProfile } from "./user-profile.entity";
 import { UserPassword } from "./user-password.entity";
+import { Role } from "./role.entity";
 
 /**
  * https://orkhan.gitbook.io/typeorm/docs/decorator-reference
@@ -43,4 +44,7 @@ export class User {
 
     @OneToMany(() => UserPassword, (userPassword: UserPassword) => userPassword.user)
     passwords: UserPassword[];
+
+    @ManyToMany(() => Role, (role: Role) => role.users)
+    roles: Role[];
 }

@@ -22,6 +22,7 @@ export class UsersService {
             relations: {
                 profile: true,
                 passwords: true,
+                roles: true,
             },
             where: {
                 username: ILike(`%${keyword || ''}%`)
