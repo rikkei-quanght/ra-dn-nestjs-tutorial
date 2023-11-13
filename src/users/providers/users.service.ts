@@ -19,6 +19,9 @@ export class UsersService {
 
     async search(keyword?: string, page?: number, limit?: number): Promise<[User[], number]> {
         return await this.userRepository.findAndCount({
+            relations: {
+                profile: true,
+            },
             where: {
                 username: ILike(`%${keyword || ''}%`)
             },
