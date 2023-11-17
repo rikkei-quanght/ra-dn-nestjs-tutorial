@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { CreateUserRequest } from '../requests/create-user.request';
 import { UsersService } from '../providers/users.service';
 import { SearchUserRequest } from '../requests/search-user.request';
 import { UpdateUserRequest } from '../requests/update-user.request';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
